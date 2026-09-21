@@ -1,9 +1,8 @@
-
 # Técnicas Multivariadas
 
 > **Note:** Course materials, code scripts, and assignments in this repository are written in Spanish.
 
-Repositorio académico para la asignatura **Técnicas Multivariadas** del Departamento Académico de Estadística e Informática de la **Universidad Nacional Agraria La Molina (UNALM)**.
+Repositorio académico para la asignatura **Técnicas Multivariadas**
 
 ---
 
