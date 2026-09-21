@@ -1,0 +1,25 @@
+# Temporales de Microsoft Office (Word, Excel, PowerPoint abiertos)
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Archivos de entorno y caché de R / RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Archivos de entorno y caché de Python / VS Code
+__pycache__/
+*.pyc
+.venv/
+.vscode/
+
+# Basura del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Datos extremadamente pesados o comprimidos (opcional)
+*.zip
+*.rar
+*.7z
