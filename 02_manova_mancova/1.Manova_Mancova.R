@@ -10,9 +10,7 @@
 ######################
 #   MANOVA EN DCA   ##
 ######################
-
 rm(list = ls())   
-
 library(foreign)
 library(tinytable)
 library(tidyverse)
@@ -24,12 +22,13 @@ library(DFA.CANCOR)
 library(psych)
 library(MVTests)
 library(emmeans)
-
-datos <-read.spss("1.Maiz.sav",
-                  use.value.labels=TRUE, 
-                  to.data.frame=TRUE)
+setwd("C:/Users/HP/OneDrive/Documentos/multivariate-statistics-course/02_manova_mancova")
+datos <- read.spss(
+  "Maiz.sav",
+  use.value.labels = TRUE, 
+  to.data.frame = TRUE
+)
 str(datos)
-
 tt(datos)
 head(datos, 20)
 
@@ -271,8 +270,8 @@ mvcontrast(emm, method = 'consec', show.ests = TRUE)
 #########################
 
 # Leer datos de panetones
-
-datos <- read.delim("clipboard")
+library(readxl)
+datos <- read_excel("DBCA_Paneton.xlsx")
 tt(datos)
 str(datos)
 
@@ -510,7 +509,7 @@ mvcontrast(emm, method = 'consec', show.ests = TRUE, adjust = 'holm')
 ##    MANOVA CON FACTORIALES EN DCA     ##
 ##########################################
 
-datos <-read.spss("1.Pimenton.sav",
+datos <-read.spss("Pimenton.sav",
                   use.value.labels=TRUE, 
                   to.data.frame=TRUE)
 str(datos)
@@ -718,18 +717,18 @@ mvcontrast(emmTempTiem, method = 'pairwise', mult.name = 'rep.meas',
 
 # Ingreso de datos (REDUFACIL)
 
-datos <- read.delim("clipboard",T)
+datos <- read_excel("redufacil.xlsx")
 tt(datos)
 str(datos)
-
-datos <- datos %>%
+# Si la dejas como texto simple, R la interpreta como cadenas aisladas sin valor analítico. Al convertirla en factor (tratamiento/bloque), R entiende que son grupos categóricos para calcular grados de libertad, comparar promedios y estructurar las matrices del MANOVA.
+datos <- datos %>% # Estas 3 columnas no son texto simple, son las etiquetas de mis tratamientos y mis bloques
   mutate(across(c(Tipo_Dieta, Tipo_Ejercicio, Sexo), as.factor)) %>%
-  glimpse()
+  glimpse() 
 
 # Supuesto de normalidad multivariada
 
 # Desagregamos la base por tratamientos
-
+# filtra y separa la base de datos en los 4 grupos de tratamiento (combinaciones posibles de Dieta y Ejercicio) y conserva únicamente las 3 variables cuantitativas (Perdida_Peso, Grasa_Corporal, Glucosa).
 trat1 = datos %>% filter(Tipo_Dieta == "Dieta1",Tipo_Ejercicio == "Ejercicio1") %>%
   dplyr::select(Perdida_Peso, Grasa_Corporal, Glucosa)
 trat2 = datos %>% filter(Tipo_Dieta == "Dieta1",Tipo_Ejercicio == "Ejercicio2") %>%
@@ -738,8 +737,8 @@ trat3 = datos %>% filter(Tipo_Dieta == "Dieta2", Tipo_Ejercicio == "Ejercicio1")
   dplyr::select(Perdida_Peso, Grasa_Corporal, Glucosa)
 trat4 = datos %>% filter(Tipo_Dieta == "Dieta2", Tipo_Ejercicio == "Ejercicio2") %>%
   dplyr::select(Perdida_Peso, Grasa_Corporal, Glucosa)
-
-#Ejecutamos el test
+# Nos da 4 tablas donde cada una es un tratamiento
+#Ejecutamos el test EVALUAMOS ACÁ NORMALIDAD MULTIVARIADA
 
 library(mvnormtest)
 mshapiro.test(t(trat1))
@@ -769,8 +768,8 @@ cortest.bartlett(cor(datos1), n = nrow(datos1))
 
 modelo = manova(cbind(Perdida_Peso, Grasa_Corporal, Glucosa)~
                 Tipo_Dieta * Tipo_Ejercicio + Sexo, data = datos)
-str(modelo)
-coef(modelo)
+#str(modelo) # Info no tan relevante
+coef(modelo) 
 Matrices = summary(modelo)$SS
 Matrices
 FDieta = Matrices$Tipo_Dieta

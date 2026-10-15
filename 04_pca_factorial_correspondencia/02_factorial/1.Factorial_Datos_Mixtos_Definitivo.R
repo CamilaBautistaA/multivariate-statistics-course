@@ -6,7 +6,7 @@
 ###################################################
 
 # Carga de librerías ------------------------------------------------------
-
+install.packages("pacman")
 library(FactoMineR)
 library(factoextra) # Visualización de resultados
 library(tidyverse) # Manipulación, transformación y visualización de datos
@@ -19,7 +19,7 @@ library(naniar) # Análisis de datos perdidos
 library(GGally) # Complemento de visualización
 library(tidytext)
 library(effectsize)
-
+pacman::p_load(FactoMineR,factoextra)
 
 # Lectura de datos --------------------------------------------------------
 
