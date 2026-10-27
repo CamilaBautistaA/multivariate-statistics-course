@@ -62,7 +62,7 @@ prueba
 
 # Chi-squared distribution with 12 d.f.
 
-qchisq(0.05,12,,lower.tail=FALSE)
+qchisq(0.05,12,lower.tail=FALSE)
 library(fastGraph)
 shadeDist( 21.02607, "dchisq", 12, lower.tail=FALSE )
 
@@ -83,7 +83,7 @@ CrossTable(datos.acs,
 #     con el paquete FactoMiner            #
 ############################################
 
-library(FactoMineR) 
+library(FactoMineR)
 
 ?CA
 res.ca = CA(datos.acs,ncp=5,graph=TRUE)
@@ -191,7 +191,7 @@ addmargins(datos_s.acs)
 # Prueba de Independencia Chi-Cuadrado  
 
 chisq.test(datos_s.acs[,-10])
-qchisq(0.05,48,,lower.tail=FALSE)
+qchisq(0.05,48,lower.tail=FALSE)
 library(fastGraph)
 shadeDist( 65.17077, "dchisq", 48, lower.tail=FALSE,col = c("black", "steelblue") )
 ?shadeDist
@@ -221,7 +221,7 @@ fviz_ca_biplot(res.ca2, repel = T) + theme_light()
 summary(res.ca2,nb.dec = 2, ncp = 2) 
 res.ca2$eig
 sum(res.ca2$eig[,1])
-str(res.ca2)
+#str(res.ca2)
 
 library(Factoshiny)
 result=Factoshiny(res.ca2)

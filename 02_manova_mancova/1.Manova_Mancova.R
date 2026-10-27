@@ -1143,7 +1143,7 @@ mvcontrast(emm, method = 'consec', show.ests = TRUE)
 ##      MANCOVA EN DBCA        ##
 #################################
 
-datos <-read.spss("1.Marranas.sav",
+datos <-read.spss("Marranas.sav",
                   use.value.labels=TRUE, 
                   to.data.frame=TRUE)
 
